@@ -3,7 +3,8 @@ import pandas as pd
 import os
 import re
 from openpyxl import load_workbook
-from openpyxl.utils import get_column_letter
+from datetime import datetime
+import csv
 
 # ========== CONFIGURAÇÕES ==========
 JIRA_DOMAIN = 'https://vtex-dev.atlassian.net'
@@ -129,22 +130,20 @@ if os.path.exists(EXCEL_PATH):
 else:
     df["KEYWORD"] = ""
 
-# ========== ATUALIZAÇÃO DE JIRA COM FORMATAÇÃO PRESERVADA ==========
+# ========== ATUALIZAÇÃO COMPLETA DA ABA JIRA COM FORMATAÇÃO PRESERVADA ==========
 if os.path.exists(EXCEL_PATH):
     wb = load_workbook(EXCEL_PATH)
     if "JIRA" in wb.sheetnames:
         ws = wb["JIRA"]
-        nova_base = df.set_index("Chave")
-        colunas_para_atualizar = ["Descrição", "Status"]
-        cabecalho = {cell.value: idx+1 for idx, cell in enumerate(next(ws.iter_rows(min_row=1, max_row=1)))}
-        for row in ws.iter_rows(min_row=2):
-            chave = row[cabecalho["Chave"] - 1].value
-            if chave in nova_base.index:
-                for col_nome in colunas_para_atualizar:
-                    nova_valor = nova_base.at[chave, col_nome]
-                    col_idx = cabecalho.get(col_nome)
-                    if col_idx:
-                        row[col_idx - 1].value = nova_valor
+        ws.delete_rows(2, ws.max_row)  # Limpa todas as linhas exceto o cabeçalho
+
+        cabecalho = {cell.value: idx+1 for idx, cell in enumerate(ws[1])}
+        colunas_excel = list(cabecalho.keys())
+
+        for row_idx, (_, linha) in enumerate(df.iterrows(), start=2):
+            for col_idx, col_nome in enumerate(colunas_excel, start=1):
+                valor = linha.get(col_nome, "")
+                ws.cell(row=row_idx, column=col_idx).value = valor
     else:
         print("A aba 'JIRA' não existe. Crie o arquivo Excel com a estrutura inicial.")
         exit(1)
@@ -176,10 +175,7 @@ for row_idx, row in enumerate(df_segmentado.values, start=2):
 wb.save(EXCEL_PATH)
 print("Exportação concluída com sucesso e com formatação preservada.")
 
-# ========== GERAÇÃO DE LOG CSV ==========
-from datetime import datetime
-import csv
-
+# ========== CÁLCULO DE MÉTRICAS PARA O LOG ==========
 novos = 0
 alterados_desc = 0
 alterados_status = 0
@@ -204,6 +200,7 @@ if antiga_base is not None and "Chave" in antiga_base.columns:
 else:
     novos = len(df)
 
+# ========== GERAÇÃO DE LOG EM CSV ==========
 log_csv_path = "log_execucao.csv"
 arquivo_novo = not os.path.exists(log_csv_path)
 
@@ -218,36 +215,20 @@ with open(log_csv_path, "a", newline="", encoding="utf-8") as log_file:
         alterados_status,
         inalterados
     ])
+    print("Log CSV de execução registrado.")
 
-print("Log CSV de execução registrado.")
+# ========== GERAÇÃO DE LOG DETALHADO EM TXT ==========
+log_txt_path = "log_detalhado.txt"
+agora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+with open(log_txt_path, "a", encoding="utf-8") as log_txt:
+    log_txt.write(f"[{agora}] Início da exportação\n")
+    log_txt.write(f"[{agora}] Tickets novos: {novos}\n")
+    log_txt.write(f"[{agora}] Tickets com descrição alterada: {alterados_desc}\n")
+    log_txt.write(f"[{agora}] Tickets com status alterado: {alterados_status}\n")
+    log_txt.write(f"[{agora}] Tickets inalterados: {inalterados}\n")
+    log_txt.write(f"[{agora}] Fim da execução\n\n")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print("Log detalhado em TXT registrado.")
 
 
