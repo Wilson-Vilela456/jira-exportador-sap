@@ -1,39 +1,51 @@
 # SCRIPT_SAP_JIRA
 
-Exportador automatizado de tickets do Jira (projeto SAPS) para Excel, com logs, formatação e segurança.
+Exportador automatizado de tickets do Jira (projeto SAPS) para Excel, com logs, segmentação de descrição, preservação de formatação e uso seguro de credenciais.
 
-## Funcionalidades
+## 🚀 Funcionalidades
+- Extração via API do Jira (projeto SAPS)
+- Exportação para Excel com formatação preservada
+- Atualização automática das colunas `Descrição` e `Status`
+- Segmentação da descrição em múltiplas colunas (`Descricao2` até `Descricao10`)
+- Geração de logs em `.csv` e `.txt`
+- Utilização de `.env` para proteger o token da API
+- Preparado para empacotamento como `.exe` (via `pyinstaller`)
 
-- Extração via API do Jira
-- Exportação para Excel com segmentação de descrição
-- Preserva formatação do Excel
-- Logs em `.csv` e `.txt`
-- Uso seguro de token via `.env`
+## 📦 Como usar
+1. Crie um arquivo `.env` na raiz do projeto com:
 
-## Como usar
-
-1. Crie o arquivo `.env` com:
-
-JIRA_API_TOKEN=seu_token_aqui
 
 2. Instale as dependências:
 
-pip install -r requirements.txt
 
 3. Execute o script:
 
-python main.py
+> O script gerará o Excel `jira_exportado_completo.xlsx` com todos os dados e uma aba extra `Descricao_Segmentada`.
 
-## Estrutura
-
-SCRIPT_SAP_JIRA/
-├── main.py
-├── .env
+## 📁 Estrutura do projeto
+jira-exportador-sap/
 ├── .gitignore
+├── .env # (IGNORADO pelo Git)
 ├── README.md
 ├── requirements.txt
+├── main.py # Script principal de exportação
+├── venv/ # Ambiente virtual (IGNORADO)
+├── dist/ # Build do .exe (IGNORADO)
+├── build/ # Build intermediário (IGNORADO)
+├── jira_exportado_completo.xlsx # GERADO automaticamente
+├── log_execucao.csv # GERADO automaticamente
+├── log_detalhado.txt # GERADO automaticamente
+└── src/
+└── Atualizacao SAP.spec # Script/Spec do executável
 
-## Aviso
 
-**Nunca envie o arquivo `.env` ou tokens para o GitHub.**
+## ⚠️ Boas práticas
+- Nunca envie arquivos sensíveis ou gerados (`.env`, `.xlsx`, `.csv`, `.txt`) para o GitHub — eles já estão protegidos no `.gitignore`.
+- Use `python-dotenv` para carregar variáveis de ambiente com segurança.
+- Após qualquer modificação no `.gitignore`, use:
+
+
+Para garantir que o Git pare de rastrear o que deve ser ignorado.
+
+
 
