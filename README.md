@@ -1,22 +1,51 @@
-# Atualização SAP - Exportador de Tickets Jira
+# SCRIPT_SAP_JIRA
 
-Projeto em Python com interface gráfica que realiza a exportação automatizada de tickets do Jira para Excel, com atualização incremental, log de execução e preservação de formatação.
+Exportador automatizado de tickets do Jira (projeto SAPS) para Excel, com logs, segmentação de descrição, preservação de formatação e uso seguro de credenciais.
 
-## Funcionalidades
+## 🚀 Funcionalidades
+- Extração via API do Jira (projeto SAPS)
+- Exportação para Excel com formatação preservada
+- Atualização automática das colunas `Descrição` e `Status`
+- Segmentação da descrição em múltiplas colunas (`Descricao2` até `Descricao10`)
+- Geração de logs em `.csv` e `.txt`
+- Utilização de `.env` para proteger o token da API
+- Preparado para empacotamento como `.exe` (via `pyinstaller`)
 
-- Exportação dos tickets do projeto SAPS via API Jira
-- Atualização das colunas `Descrição` e `Status` em um Excel existente
-- Interface gráfica simples com botão de execução
-- Segmentação da descrição em múltiplas colunas
-- Geração de log CSV com estatísticas por execução
-- Empacotamento como executável `.exe` com nome e ícone personalizado
+## 📦 Como usar
+1. Crie um arquivo `.env` na raiz do projeto com:
 
-## Como usar
 
-1. Execute `Atualizacao SAP.exe`
-2. Clique em "Executar Exportação"
-3. Verifique o arquivo `jira_exportado_completo.xlsx` atualizado
-4. Consulte o `log_execucao.csv` para ver quantos tickets foram adicionados ou alterados
+2. Instale as dependências:
 
-## Estrutura do projeto
+
+3. Execute o script:
+
+> O script gerará o Excel `jira_exportado_completo.xlsx` com todos os dados e uma aba extra `Descricao_Segmentada`.
+
+## 📁 Estrutura do projeto
+jira-exportador-sap/
+├── .gitignore
+├── .env # (IGNORADO pelo Git)
+├── README.md
+├── requirements.txt
+├── main.py # Script principal de exportação
+├── venv/ # Ambiente virtual (IGNORADO)
+├── dist/ # Build do .exe (IGNORADO)
+├── build/ # Build intermediário (IGNORADO)
+├── jira_exportado_completo.xlsx # GERADO automaticamente
+├── log_execucao.csv # GERADO automaticamente
+├── log_detalhado.txt # GERADO automaticamente
+└── src/
+└── Atualizacao SAP.spec # Script/Spec do executável
+
+
+## ⚠️ Boas práticas
+- Nunca envie arquivos sensíveis ou gerados (`.env`, `.xlsx`, `.csv`, `.txt`) para o GitHub — eles já estão protegidos no `.gitignore`.
+- Use `python-dotenv` para carregar variáveis de ambiente com segurança.
+- Após qualquer modificação no `.gitignore`, use:
+
+
+Para garantir que o Git pare de rastrear o que deve ser ignorado.
+
+
 

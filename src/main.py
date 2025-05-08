@@ -2,15 +2,20 @@ import requests
 import pandas as pd
 import os
 import re
-from openpyxl import load_workbook
+from openpyxl import load_workbook, Workbook
 from datetime import datetime
 import csv
+
+# Carregar variáveis do arquivo .env
+from dotenv import load_dotenv
+load_dotenv()
 
 # ========== CONFIGURAÇÕES ==========
 JIRA_DOMAIN = 'https://vtex-dev.atlassian.net'
 EMAIL = 'wilson.vilela@vtex.com'
-API_TOKEN = 'ATATT3xFfGF0853Qk5EiNnwWqzULuxyJrptgp0W7JtaLYN5E7TwpS86tz8PZ4nyII0_fTZ3K-BtQBod3dDS8RQhP1yWyOZtgbUzKmpvghk3j9il2ZzHaa_WR-Y9IXTkGKKlRtaTB8ScJIFNDc8vmcnR1X8ryyJIM3a777GS5m8wOsnxbA4oVq58=937D4F63'
+API_TOKEN = os.getenv("JIRA_API_TOKEN")  # Token agora vem do .env
 EXCEL_PATH = "jira_exportado_completo.xlsx"
+
 
 TEAM_MAP = {
     "thago.oliveira@vtex.com": "SAP-Team",
@@ -130,28 +135,52 @@ if os.path.exists(EXCEL_PATH):
 else:
     df["KEYWORD"] = ""
 
-# ========== ATUALIZAÇÃO COMPLETA DA ABA JIRA COM FORMATAÇÃO PRESERVADA ==========
+# ========== ATUALIZAÇÃO COMPLETA DA ABA JIRA OU CRIAÇÃO DO ARQUIVO ==========
 if os.path.exists(EXCEL_PATH):
     wb = load_workbook(EXCEL_PATH)
     if "JIRA" in wb.sheetnames:
         ws = wb["JIRA"]
-        ws.delete_rows(2, ws.max_row)  # Limpa todas as linhas exceto o cabeçalho
-
-        cabecalho = {cell.value: idx+1 for idx, cell in enumerate(ws[1])}
+        cabecalho = {cell.value: idx + 1 for idx, cell in enumerate(ws[1])}
         colunas_excel = list(cabecalho.keys())
 
         for row_idx, (_, linha) in enumerate(df.iterrows(), start=2):
             for col_idx, col_nome in enumerate(colunas_excel, start=1):
                 valor = linha.get(col_nome, "")
-                ws.cell(row=row_idx, column=col_idx).value = valor
+                cell = ws.cell(row=row_idx, column=col_idx)
+                cell.value = valor
+
+        for row in ws.iter_rows(min_row=len(df) + 2, max_row=ws.max_row):
+            for cell in row:
+                cell.value = None
     else:
         print("A aba 'JIRA' não existe. Crie o arquivo Excel com a estrutura inicial.")
         exit(1)
 else:
-    print("Arquivo Excel não encontrado.")
-    exit(1)
+    print("Arquivo Excel não encontrado. Criando novo arquivo...")
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "JIRA"
+    colunas_jira = list(df.columns)
+    for idx, col_nome in enumerate(colunas_jira, start=1):
+        ws.cell(row=1, column=idx).value = col_nome
+    for row_idx, row in enumerate(df[colunas_jira].values.tolist(), start=2):
+        for col_idx, valor in enumerate(row, start=1):
+            ws.cell(row=row_idx, column=col_idx).value = valor
+    ws2 = wb.create_sheet("Descricao_Segmentada")
+    df_segmentado = df[["Chave", "CÓDIGO", "Descrição"]].copy()
+    descricoes = df_segmentado["Descrição"].fillna("").astype(str).str.split("#")
+    for i in range(1, 10):
+        df_segmentado[f"Descricao{i+1}"] = descricoes.apply(lambda x: x[i] if len(x) > i else "")
+    df_segmentado = df_segmentado.drop(columns=["Descrição"])
+    for col_idx, col_nome in enumerate(df_segmentado.columns, start=1):
+        ws2.cell(row=1, column=col_idx).value = col_nome
+    for row_idx, row in enumerate(df_segmentado.values, start=2):
+        for col_idx, valor in enumerate(row, start=1):
+            ws2.cell(row=row_idx, column=col_idx).value = valor
+    wb.save(EXCEL_PATH)
+    print("Novo arquivo Excel criado com abas 'JIRA' e 'Descricao_Segmentada'. Continuação da execução...")
 
-# ========== ATUALIZAÇÃO DA ABA DESCRICAO_SEGMENTADA COM FORMATAÇÃO PRESERVADA ==========
+# ========== ATUALIZAÇÃO DA ABA DESCRICAO_SEGMENTADA ==========
 if "Descricao_Segmentada" in wb.sheetnames:
     ws2 = wb["Descricao_Segmentada"]
     for row in ws2.iter_rows(min_row=2, max_row=ws2.max_row, max_col=ws2.max_column):
@@ -175,16 +204,15 @@ for row_idx, row in enumerate(df_segmentado.values, start=2):
 wb.save(EXCEL_PATH)
 print("Exportação concluída com sucesso e com formatação preservada.")
 
-# ========== CÁLCULO DE MÉTRICAS PARA O LOG ==========
+# ========== CÁLCULO DE MÉTRICAS ==========
 novos = 0
 alterados_desc = 0
 alterados_status = 0
 inalterados = 0
 
-if antiga_base is not None and "Chave" in antiga_base.columns:
+if 'antiga_base' in locals() and antiga_base is not None and "Chave" in antiga_base.columns:
     antiga_base = antiga_base.set_index("Chave")
     nova_base = df.set_index("Chave")
-
     for chave in nova_base.index:
         if chave not in antiga_base.index:
             novos += 1
@@ -200,7 +228,7 @@ if antiga_base is not None and "Chave" in antiga_base.columns:
 else:
     novos = len(df)
 
-# ========== GERAÇÃO DE LOG EM CSV ==========
+# ========== LOG EM CSV ==========
 log_csv_path = "log_execucao.csv"
 arquivo_novo = not os.path.exists(log_csv_path)
 
@@ -217,7 +245,7 @@ with open(log_csv_path, "a", newline="", encoding="utf-8") as log_file:
     ])
     print("Log CSV de execução registrado.")
 
-# ========== GERAÇÃO DE LOG DETALHADO EM TXT ==========
+# ========== LOG DETALHADO EM TXT ==========
 log_txt_path = "log_detalhado.txt"
 agora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -230,5 +258,8 @@ with open(log_txt_path, "a", encoding="utf-8") as log_txt:
     log_txt.write(f"[{agora}] Fim da execução\n\n")
 
 print("Log detalhado em TXT registrado.")
+
+
+
 
 
