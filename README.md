@@ -1,22 +1,39 @@
-# Atualização SAP - Exportador de Tickets Jira
+# SCRIPT_SAP_JIRA
 
-Projeto em Python com interface gráfica que realiza a exportação automatizada de tickets do Jira para Excel, com atualização incremental, log de execução e preservação de formatação.
+Exportador automatizado de tickets do Jira (projeto SAPS) para Excel, com logs, formatação e segurança.
 
 ## Funcionalidades
 
-- Exportação dos tickets do projeto SAPS via API Jira
-- Atualização das colunas `Descrição` e `Status` em um Excel existente
-- Interface gráfica simples com botão de execução
-- Segmentação da descrição em múltiplas colunas
-- Geração de log CSV com estatísticas por execução
-- Empacotamento como executável `.exe` com nome e ícone personalizado
+- Extração via API do Jira
+- Exportação para Excel com segmentação de descrição
+- Preserva formatação do Excel
+- Logs em `.csv` e `.txt`
+- Uso seguro de token via `.env`
 
 ## Como usar
 
-1. Execute `Atualizacao SAP.exe`
-2. Clique em "Executar Exportação"
-3. Verifique o arquivo `jira_exportado_completo.xlsx` atualizado
-4. Consulte o `log_execucao.csv` para ver quantos tickets foram adicionados ou alterados
+1. Crie o arquivo `.env` com:
 
-## Estrutura do projeto
+JIRA_API_TOKEN=seu_token_aqui
+
+2. Instale as dependências:
+
+pip install -r requirements.txt
+
+3. Execute o script:
+
+python main.py
+
+## Estrutura
+
+SCRIPT_SAP_JIRA/
+├── main.py
+├── .env
+├── .gitignore
+├── README.md
+├── requirements.txt
+
+## Aviso
+
+**Nunca envie o arquivo `.env` ou tokens para o GitHub.**
 
