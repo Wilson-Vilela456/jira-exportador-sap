@@ -1,0 +1,21 @@
+# Ambiente virtual
+venv/
+env/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Logs e arquivos gerados
+*.log
+*.txt
+*.csv
+*.xlsx
+
+# Configurações locais
+.env
+.vscode/
+
+# Build (se gerar .exe depois)
+build/
+dist/
