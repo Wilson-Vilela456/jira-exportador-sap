@@ -205,9 +205,11 @@ wb.save(EXCEL_PATH)
 print("Exportação concluída com sucesso e com formatação preservada.")
 
 # ========== CÁLCULO DE MÉTRICAS ==========
+# ========== CÁLCULO DE MÉTRICAS ==========
 novos = 0
 alterados_desc = 0
 alterados_status = 0
+alterados_responsavel = 0
 inalterados = 0
 
 if 'antiga_base' in locals() and antiga_base is not None and "Chave" in antiga_base.columns:
@@ -219,11 +221,14 @@ if 'antiga_base' in locals() and antiga_base is not None and "Chave" in antiga_b
         else:
             alterou_desc = nova_base.at[chave, "Descrição"] != antiga_base.at[chave, "Descrição"]
             alterou_status = nova_base.at[chave, "Status"] != antiga_base.at[chave, "Status"]
+            alterou_resp = nova_base.at[chave, "Responsável"] != antiga_base.at[chave, "Responsável"]
             if alterou_desc:
                 alterados_desc += 1
             if alterou_status:
                 alterados_status += 1
-            if not alterou_desc and not alterou_status:
+            if alterou_resp:
+                alterados_responsavel += 1
+            if not alterou_desc and not alterou_status and not alterou_resp:
                 inalterados += 1
 else:
     novos = len(df)
@@ -235,12 +240,13 @@ arquivo_novo = not os.path.exists(log_csv_path)
 with open(log_csv_path, "a", newline="", encoding="utf-8") as log_file:
     writer = csv.writer(log_file)
     if arquivo_novo:
-        writer.writerow(["Data", "Novos", "Descricao Alterada", "Status Alterado", "Inalterados"])
+        writer.writerow(["Data", "Novos", "Descricao Alterada", "Status Alterado", "Responsavel Alterado", "Inalterados"])
     writer.writerow([
         datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         novos,
         alterados_desc,
         alterados_status,
+        alterados_responsavel,
         inalterados
     ])
     print("Log CSV de execução registrado.")
@@ -254,12 +260,14 @@ with open(log_txt_path, "a", encoding="utf-8") as log_txt:
     log_txt.write(f"[{agora}] Tickets novos: {novos}\n")
     log_txt.write(f"[{agora}] Tickets com descrição alterada: {alterados_desc}\n")
     log_txt.write(f"[{agora}] Tickets com status alterado: {alterados_status}\n")
+    log_txt.write(f"[{agora}] Tickets com responsável alterado: {alterados_responsavel}\n")
     log_txt.write(f"[{agora}] Tickets inalterados: {inalterados}\n")
     log_txt.write(f"[{agora}] Fim da execução\n\n")
 
+print("\nResumo final da execução:")
+print(f" - Tickets novos: {novos}")
+print(f" - Descrição alterada: {alterados_desc}")
+print(f" - Status alterado: {alterados_status}")
+print(f" - Responsável alterado: {alterados_responsavel}")
+print(f" - Inalterados: {inalterados}")
 print("Log detalhado em TXT registrado.")
-
-
-
-
-
