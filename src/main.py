@@ -83,11 +83,13 @@ print("Iniciando exportação...")
 while True:
     url = f"{JIRA_DOMAIN}/rest/api/3/search"
     params = {
-        "jql": JQL,
-        "startAt": start_at,
-        "maxResults": max_results,
-        "fields": "key,summary,created,updated,description,priority,reporter,assignee,status,customfield_10016,customfield_10704"
-    }
+    "jql": JQL,
+    "startAt": start_at,
+    "maxResults": max_results,
+    "fields": "key,summary,created,updated,description,priority,reporter,assignee,status,customfield_10016,customfield_10704"
+
+}
+
     response = requests.get(url, headers=headers, params=params, auth=auth)
     if response.status_code != 200:
         print("Erro:", response.status_code, response.text)
@@ -221,7 +223,12 @@ if 'antiga_base' in locals() and antiga_base is not None and "Chave" in antiga_b
         else:
             alterou_desc = nova_base.at[chave, "Descrição"] != antiga_base.at[chave, "Descrição"]
             alterou_status = nova_base.at[chave, "Status"] != antiga_base.at[chave, "Status"]
-            alterou_resp = nova_base.at[chave, "Responsável"] != antiga_base.at[chave, "Responsável"]
+            alterou_resp = (
+    pd.notna(nova_base.at[chave, "Responsável"])
+    and pd.notna(antiga_base.at[chave, "Responsável"])
+    and nova_base.at[chave, "Responsável"].strip().lower() != antiga_base.at[chave, "Responsável"].strip().lower()
+)
+
             if alterou_desc:
                 alterados_desc += 1
             if alterou_status:

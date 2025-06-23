@@ -169,3 +169,179 @@ Resumo final da execução:
 [2025-05-16 10:59:57] Tickets inalterados: 2623
 [2025-05-16 10:59:57] Fim da execução
 
+[2025-05-19 18:12:16] Início da exportação
+[2025-05-19 18:12:16] Tickets novos: 12
+[2025-05-19 18:12:16] Tickets com descrição alterada: 3
+[2025-05-19 18:12:16] Tickets com status alterado: 7
+[2025-05-19 18:12:16] Tickets com responsável alterado: 50
+[2025-05-19 18:12:16] Tickets inalterados: 2618
+[2025-05-19 18:12:16] Fim da execução
+
+[2025-05-19 18:34:04] Início da exportação
+[2025-05-19 18:34:04] Tickets novos: 0
+[2025-05-19 18:34:04] Tickets com descrição alterada: 1
+[2025-05-19 18:34:04] Tickets com status alterado: 0
+[2025-05-19 18:34:04] Tickets com responsável alterado: 53
+[2025-05-19 18:34:04] Tickets inalterados: 2633
+[2025-05-19 18:34:04] Fim da execução
+
+[2025-05-19 18:45:31] Início da exportação
+[2025-05-19 18:45:31] Tickets novos: 0
+[2025-05-19 18:45:31] Tickets com descrição alterada: 1
+[2025-05-19 18:45:31] Tickets com status alterado: 0
+[2025-05-19 18:45:31] Tickets com responsável alterado: 50
+[2025-05-19 18:45:31] Tickets inalterados: 2636
+[2025-05-19 18:45:31] Fim da execução
+
+[2025-05-19 18:49:59] Início da exportação
+[2025-05-19 18:49:59] Tickets novos: 0
+[2025-05-19 18:49:59] Tickets com descrição alterada: 1
+[2025-05-19 18:49:59] Tickets com status alterado: 0
+[2025-05-19 18:49:59] Tickets com responsável alterado: 50
+[2025-05-19 18:49:59] Tickets inalterados: 2636
+[2025-05-19 18:49:59] Fim da execução
+
+[2025-05-21 10:29:47] Início da exportação
+[2025-05-21 10:29:47] Tickets novos: 6
+[2025-05-21 10:29:47] Tickets com descrição alterada: 1
+[2025-05-21 10:29:47] Tickets com status alterado: 8
+[2025-05-21 10:29:47] Tickets com responsável alterado: 50
+[2025-05-21 10:29:47] Tickets inalterados: 2630
+[2025-05-21 10:29:47] Fim da execução
+
+[2025-05-22 21:07:51] Início da exportação
+[2025-05-22 21:07:51] Tickets novos: 13
+[2025-05-22 21:07:51] Tickets com descrição alterada: 1
+[2025-05-22 21:07:51] Tickets com status alterado: 13
+[2025-05-22 21:07:51] Tickets com responsável alterado: 52
+[2025-05-22 21:07:51] Tickets inalterados: 2628
+[2025-05-22 21:07:51] Fim da execução
+
+[2025-05-23 15:39:35] Início da exportação
+[2025-05-23 15:39:35] Tickets novos: 3
+[2025-05-23 15:39:35] Tickets com descrição alterada: 1
+[2025-05-23 15:39:35] Tickets com status alterado: 0
+[2025-05-23 15:39:35] Tickets com responsável alterado: 48
+[2025-05-23 15:39:35] Tickets inalterados: 2657
+[2025-05-23 15:39:35] Fim da execução
+
+[2025-05-23 17:56:16] Início da exportação
+[2025-05-23 17:56:16] Tickets novos: 1
+[2025-05-23 17:56:16] Tickets com descrição alterada: 1
+[2025-05-23 17:56:16] Tickets com status alterado: 0
+[2025-05-23 17:56:16] Tickets com responsável alterado: 49
+[2025-05-23 17:56:16] Tickets inalterados: 2659
+[2025-05-23 17:56:16] Fim da execução
+
+[2025-05-27 11:44:46] Início da exportação
+[2025-05-27 11:44:46] Tickets novos: 2
+[2025-05-27 11:44:46] Tickets com descrição alterada: 2
+[2025-05-27 11:44:46] Tickets com status alterado: 12
+[2025-05-27 11:44:46] Tickets com responsável alterado: 50
+[2025-05-27 11:44:46] Tickets inalterados: 2650
+[2025-05-27 11:44:46] Fim da execução
+
+[2025-05-29 18:38:10] Início da exportação
+[2025-05-29 18:38:10] Tickets novos: 17
+[2025-05-29 18:38:10] Tickets com descrição alterada: 1
+[2025-05-29 18:38:10] Tickets com status alterado: 3
+[2025-05-29 18:38:10] Tickets com responsável alterado: 48
+[2025-05-29 18:38:10] Tickets inalterados: 2661
+[2025-05-29 18:38:10] Fim da execução
+
+[2025-05-30 18:04:52] Início da exportação
+[2025-05-30 18:04:52] Tickets novos: 6
+[2025-05-30 18:04:52] Tickets com descrição alterada: 1
+[2025-05-30 18:04:52] Tickets com status alterado: 7
+[2025-05-30 18:04:52] Tickets com responsável alterado: 51
+[2025-05-30 18:04:52] Tickets inalterados: 2671
+[2025-05-30 18:04:52] Fim da execução
+
+[2025-06-05 14:51:23] Início da exportação
+[2025-06-05 14:51:23] Tickets novos: 19
+[2025-06-05 14:51:23] Tickets com descrição alterada: 6
+[2025-06-05 14:51:23] Tickets com status alterado: 16
+[2025-06-05 14:51:23] Tickets com responsável alterado: 52
+[2025-06-05 14:51:23] Tickets inalterados: 2667
+[2025-06-05 14:51:23] Fim da execução
+
+[2025-06-09 10:27:54] Início da exportação
+[2025-06-09 10:27:54] Tickets novos: 11
+[2025-06-09 10:27:54] Tickets com descrição alterada: 2
+[2025-06-09 10:27:54] Tickets com status alterado: 6
+[2025-06-09 10:27:54] Tickets com responsável alterado: 53
+[2025-06-09 10:27:54] Tickets inalterados: 2694
+[2025-06-09 10:27:54] Fim da execução
+
+[2025-06-11 10:33:34] Início da exportação
+[2025-06-11 10:33:34] Tickets novos: 5
+[2025-06-11 10:33:34] Tickets com descrição alterada: 2
+[2025-06-11 10:33:34] Tickets com status alterado: 3
+[2025-06-11 10:33:34] Tickets com responsável alterado: 56
+[2025-06-11 10:33:34] Tickets inalterados: 2707
+[2025-06-11 10:33:34] Fim da execução
+
+[2025-06-11 14:46:51] Início da exportação
+[2025-06-11 14:46:51] Tickets novos: 0
+[2025-06-11 14:46:51] Tickets com descrição alterada: 2
+[2025-06-11 14:46:51] Tickets com status alterado: 3
+[2025-06-11 14:46:51] Tickets com responsável alterado: 57
+[2025-06-11 14:46:51] Tickets inalterados: 2711
+[2025-06-11 14:46:51] Fim da execução
+
+[2025-06-12 18:33:28] Início da exportação
+[2025-06-12 18:33:28] Tickets novos: 9
+[2025-06-12 18:33:28] Tickets com descrição alterada: 2
+[2025-06-12 18:33:28] Tickets com status alterado: 1
+[2025-06-12 18:33:28] Tickets com responsável alterado: 55
+[2025-06-12 18:33:28] Tickets inalterados: 2713
+[2025-06-12 18:33:28] Fim da execução
+
+[2025-06-16 15:07:00] Início da exportação
+[2025-06-16 15:07:00] Tickets novos: 5
+[2025-06-16 15:07:00] Tickets com descrição alterada: 2
+[2025-06-16 15:07:00] Tickets com status alterado: 3
+[2025-06-16 15:07:00] Tickets com responsável alterado: 56
+[2025-06-16 15:07:00] Tickets inalterados: 2719
+[2025-06-16 15:07:00] Fim da execução
+
+[2025-06-18 11:39:39] Início da exportação
+[2025-06-18 11:39:39] Tickets novos: 12
+[2025-06-18 11:39:39] Tickets com descrição alterada: 2
+[2025-06-18 11:39:39] Tickets com status alterado: 0
+[2025-06-18 11:39:39] Tickets com responsável alterado: 58
+[2025-06-18 11:39:39] Tickets inalterados: 2725
+[2025-06-18 11:39:39] Fim da execução
+
+[2025-06-23 10:46:05] Início da exportação
+[2025-06-23 10:46:05] Tickets novos: 1
+[2025-06-23 10:46:05] Tickets com descrição alterada: 2
+[2025-06-23 10:46:05] Tickets com status alterado: 1
+[2025-06-23 10:46:05] Tickets com responsável alterado: 74
+[2025-06-23 10:46:05] Tickets inalterados: 2736
+[2025-06-23 10:46:05] Fim da execução
+
+[2025-06-23 15:23:19] Início da exportação
+[2025-06-23 15:23:19] Tickets novos: 0
+[2025-06-23 15:23:19] Tickets com descrição alterada: 2
+[2025-06-23 15:23:19] Tickets com status alterado: 0
+[2025-06-23 15:23:19] Tickets com responsável alterado: 2813
+[2025-06-23 15:23:19] Tickets inalterados: 0
+[2025-06-23 15:23:19] Fim da execução
+
+[2025-06-23 15:26:53] Início da exportação
+[2025-06-23 15:26:53] Tickets novos: 0
+[2025-06-23 15:26:53] Tickets com descrição alterada: 2
+[2025-06-23 15:26:53] Tickets com status alterado: 0
+[2025-06-23 15:26:53] Tickets com responsável alterado: 76
+[2025-06-23 15:26:53] Tickets inalterados: 2737
+[2025-06-23 15:26:53] Fim da execução
+
+[2025-06-23 15:41:57] Início da exportação
+[2025-06-23 15:41:57] Tickets novos: 0
+[2025-06-23 15:41:57] Tickets com descrição alterada: 2
+[2025-06-23 15:41:57] Tickets com status alterado: 0
+[2025-06-23 15:41:57] Tickets com responsável alterado: 0
+[2025-06-23 15:41:57] Tickets inalterados: 2811
+[2025-06-23 15:41:57] Fim da execução
+
